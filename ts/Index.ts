@@ -35,6 +35,10 @@ let win_flag:boolean                             //勝利判定
 //その他の変数。
 let tick:number                                = 0
 let intervaltimer:number                       = 0
+//ネット系
+// const socket:WebSocket = new WebSocket("ws://localhost:5001")
+
+
 
 function main()
 {

@@ -36,6 +36,8 @@ var win_flag; //勝利判定
 //その他の変数。
 var tick = 0;
 var intervaltimer = 0;
+//ネット系
+// const socket:WebSocket = new WebSocket("ws://localhost:5001")
 function main() {
     context.transform(1, 0, 0, -1, 0, canvas.height);
     context.fillStyle = 'rgb(00,255,00)';

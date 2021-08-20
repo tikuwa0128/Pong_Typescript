@@ -26,13 +26,23 @@ var Update = /** @class */ (function () {
         ////動きについての処理。
         if (upFlag == true) //Playerの動き処理上。
          {
-            if (!(player.location.y > 490))
+            if (!(player.location.y > 490)) {
+                var vector = new Vector(0, 1);
+                var packet = new MovePaket("left", vector);
+                console.log(packet.toJson()); //
+                // socket.send(packet.toJson())
                 player.location = new Vector(player.location.x, player.location.y + player_lodspeed);
+            }
         }
         if (downFlag == true) //Playerの動き処理下。
          {
-            if (!(player.location.y < 0))
+            if (!(player.location.y < 0)) {
+                var vector = new Vector(0, -1);
+                var packet = new MovePaket("left", vector);
+                console.log(packet.toJson()); //
+                // socket.send(packet.toJson())
                 player.location = new Vector(player.location.x, player.location.y - player_lodspeed);
+            }
         }
         if (npc.getCenter().y < box.getCenter().y) //NPCの動き処理上。
          {
