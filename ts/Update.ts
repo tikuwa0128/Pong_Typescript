@@ -1,5 +1,21 @@
+
+const socket:WebSocket = new WebSocket("ws://localhost:5001")
+
+socket.addEventListener("message",(event) => {
+    const packet = JSON.parse(event.data)
+    if(packet.player == "left")
+    {
+        player.location = player.location.add(packet.vector)
+    }
+    else if(packet.player == "right")
+    {
+        npc.location = npc.location.add(packet.vector)
+    }
+})
+
 class Update
 {
+    
     start_scene()
     {
         if(spaceFlag) App.scene = "game"
@@ -7,6 +23,7 @@ class Update
 
     game_scene()
     {
+        
         if (player_score >= winpoint || npc_score >= winpoint) //スコア判定。
         {
             if (player_score >= winpoint) win_flag = true
@@ -28,8 +45,7 @@ class Update
             {
                 const vector = new Vector(0,1)
                 const packet = new MovePaket("left",vector)
-                console.log(packet.toJson())//
-                // socket.send(packet.toJson())
+                socket.send(packet.toJson())
                 player.location = new Vector(player.location.x,player.location.y + player_lodspeed)
             }
         }
@@ -39,8 +55,7 @@ class Update
             {
                 const vector = new Vector(0,-1)
                 const packet = new MovePaket("left",vector)
-                console.log(packet.toJson())//
-                // socket.send(packet.toJson())
+                socket.send(packet.toJson())
                 player.location = new Vector(player.location.x,player.location.y - player_lodspeed)
             }
         }

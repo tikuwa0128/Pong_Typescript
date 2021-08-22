@@ -1,4 +1,14 @@
 "use strict";
+var socket = new WebSocket("ws://localhost:5001");
+socket.addEventListener("message", function (event) {
+    var packet = JSON.parse(event.data);
+    if (packet.player == "left") {
+        player.location = player.location.add(packet.vector);
+    }
+    else if (packet.player == "right") {
+        npc.location = npc.location.add(packet.vector);
+    }
+});
 var Update = /** @class */ (function () {
     function Update() {
     }
@@ -29,8 +39,7 @@ var Update = /** @class */ (function () {
             if (!(player.location.y > 490)) {
                 var vector = new Vector(0, 1);
                 var packet = new MovePaket("left", vector);
-                console.log(packet.toJson()); //
-                // socket.send(packet.toJson())
+                socket.send(packet.toJson());
                 player.location = new Vector(player.location.x, player.location.y + player_lodspeed);
             }
         }
@@ -39,8 +48,7 @@ var Update = /** @class */ (function () {
             if (!(player.location.y < 0)) {
                 var vector = new Vector(0, -1);
                 var packet = new MovePaket("left", vector);
-                console.log(packet.toJson()); //
-                // socket.send(packet.toJson())
+                socket.send(packet.toJson());
                 player.location = new Vector(player.location.x, player.location.y - player_lodspeed);
             }
         }
